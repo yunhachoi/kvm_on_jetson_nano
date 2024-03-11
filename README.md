@@ -52,6 +52,18 @@ make -C kernel/kernel-4.9/ ARCH=arm64 O=$TEGRA_KERNEL_OUT LOCALVERSION=-tegra -j
 make -C kernel/kernel-4.9/ ARCH=arm64 O=$TEGRA_KERNEL_OUT LOCALVERSION=-tegra -j4 --output-sync=target dtbs
 make -C kernel/kernel-4.9/ ARCH=arm64 O=$TEGRA_KERNEL_OUT LOCALVERSION=-tegra INSTALL_MOD_PATH=$KERNEL_MODULES_OUT modules_install</code></pre>
 
+<pre><code>sudo cp -r /boot /boot_original
+sudo cp -r /lib /lib_original</code></pre>
+
+
+<pre><code>cd $JETSON_NANO_KERNEL_SOURCE/modules/lib/
+sudo cp -r firmware/* /lib/firmware
+sudo cp -r modules/* /lib/modules</code></pre>
+
+
+<pre><code>cd $JETSON_NANO_KERNEL_SOURCE/build/arch/arm64/
+sudo rsync -avh boot/* /boot</code></pre>
+
 Now, KVM module exists.
 
 ```
@@ -64,19 +76,6 @@ sudo dmesg | grep -i kvm
 [    1.065239] kvm [1]: Hyp mode initialized successfully
 [    1.065315] kvm [1]: virtual timer IRQ7
 ```
-
-
-<pre><code>sudo cp -r /boot /boot_original
-sudo cp -r /lib /lib_original</code></pre>
-
-
-<pre><code>cd $JETSON_NANO_KERNEL_SOURCE/modules/lib/
-sudo cp -r firmware/* /lib/firmware
-sudo cp -r modules/* /lib/modules</code></pre>
-
-
-<pre><code>cd $JETSON_NANO_KERNEL_SOURCE/build/arch/arm64/
-sudo rsync -avh boot/* /boot</code></pre>
 
 Check the DTS file name.
 
