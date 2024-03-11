@@ -1,4 +1,4 @@
-# enable_kvm_on_jetson_nano
+# kvm_on_jetson_nano
 
 sudo dmesg | grep -i kvm
 > nothing
